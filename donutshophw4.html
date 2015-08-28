@@ -4,6 +4,7 @@
     <title>Donut Shop</title>
   </head>
   <body>
+
     <table border=1>
       <thead>
       <th>Donut Shop</th>
@@ -12,8 +13,7 @@
       </thead>
 
       <script>
-
-        function DonutShop(numHoursOpen, minCustPerHour, maxCustPerHour, avgDonutsPerCust, location) {
+function DonutShop(numHoursOpen, minCustPerHour, maxCustPerHour, avgDonutsPerCust, location) {
           this.numHoursOpen = numHoursOpen;
           this.minCustPerHour = minCustPerHour;
           this.maxCustPerHour = maxCustPerHour;
@@ -36,20 +36,47 @@
             "</td><tr>";
             };
         }
-        var DonutMaster
+        var DonutMaster = function() {
+          this.donutList = [];
+          this.addShop = function (shop) {
+            this.donutList.push(shop);
+          };
+          this.generateReport = function () {
+            for (var i = 0; i < this.donutList.length; i++) {
+              console.log("location " + this.donutList[i].storeLocation + " donuts per hour " +
+               this.donutList[i].getDonutsPerHour() + " donuts per day " + this.donutList[i].getDonutsBakedPerDay());
+            }
+          };
+
+        };
+
 
 
         var downtown = new DonutShop(8,8,43,4.50, "Downtown");
-        var capitolHill = new DonutShop (8, 4, 37, 2,"Capitol Hill");
-        var southLakeUnion = new DonutShop (8, 9, 23, 6.33, "South Lake Union");
-        var wedgewood = new DonutShop (8, 2, 28, 1.25 ,"Wedgewood");
-        var ballard = new DonutShop (8, 8, 58, 3.75 ,"Ballard");
+        var capitolHill = new DonutShop(8, 4, 37, 2,"Capitol Hill");
+        var southLakeUnion = new DonutShop(8, 9, 23, 6.33, "South Lake Union");
+        var wedgewood = new DonutShop(8, 2, 28, 1.25 ,"Wedgewood");
+        var ballard = new DonutShop(8, 8, 58, 3.75 ,"Ballard");
+        var edmonds = new DonutShop(8, 8, 58, 3.75 ,"Edmonds");
+        var franchise = new DonutMaster();
+
+        franchise.addShop(downtown);
+        franchise.addShop(capitolHill);
+        franchise.addShop(southLakeUnion);
+        franchise.addShop(wedgewood);
+        franchise.addShop(ballard);
+        franchise.addShop(edmonds);
+        franchise.generateReport();
+
+
 
         document.write(downtown.report());
         document.write(capitolHill.report());
         document.write(southLakeUnion.report());
         document.write(wedgewood.report());
         document.write(ballard.report());
+        document.write(edmonds.report());
+
 
       </script>
     </table>
